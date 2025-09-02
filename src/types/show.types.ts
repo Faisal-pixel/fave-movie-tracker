@@ -6,4 +6,5 @@ export type show = {
   rating: string | null;
   network: string | null;
   status: string | null;
+  tvrage?: number | null;
 };

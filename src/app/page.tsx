@@ -1,7 +1,6 @@
 "use client";
 import React, {
   useState,
-  useMemo,
   useEffect,
   useCallback,
   useContext,
@@ -24,7 +23,12 @@ const TVShowTracker = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 100 });
   const [dummyShows, setDummyShows] = useState<show[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set());
-  const { shows, loading: showLoading, error } = useContext(ShowContext);
+  const {
+    shows,
+    loading: showLoading,
+    error,
+    searchQuery,
+  } = useContext(ShowContext);
 
   useEffect(() => {
     const favoriteShows = localStorage.getItem("favoriteShows");
@@ -48,11 +52,26 @@ const TVShowTracker = () => {
     setDummyShows(shows);
   }, [shows]);
 
+  const [visibleShows, setVisibleShows] = useState<show[]>([]);
+
+  useEffect(() => {
+    if (!searchQuery?.trim()) {
+      setVisibleShows(shows);
+    }
+  }, [shows, searchQuery]);
+
+  const filteredFavorites = React.useMemo(() => {
+      if (!searchQuery || !searchQuery.trim()) return dummyShows;
+      return dummyShows.filter((show) =>
+        show.name?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }, [searchQuery, dummyShows]);
+
   // Sort shows based on current sort order
 
   // Group shows alphabetically
 
-  const groupedShows = groupedShowsHelper(dummyShows);
+  const groupedShows = groupedShowsHelper(filteredFavorites ? filteredFavorites : visibleShows);
 
   const sortedShows = sortedShowsHelpers(sortOrder, groupedShows);
 
@@ -114,8 +133,8 @@ const TVShowTracker = () => {
   };
   console.log("I rendered");
 
-  if(error) {
-    return <div>Error loading shows</div>
+  if (error) {
+    return <div>Error loading shows</div>;
   }
 
   return (
@@ -150,28 +169,34 @@ const TVShowTracker = () => {
           </div>
 
           {/* Grouped Shows */}
-          <div className="space-y-8">
-            {Object.entries(sortedShows).map(([letter, shows]) => (
-              <div key={letter} className="space-y-4">
-                <h2 className="text-3xl font-bold text-white/90 border-b border-white/20 pb-2">
-                  {letter}
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-                  {shows.map((show) => (
-                    <MovieCard
-                      key={show.id}
-                      favoriteIds={favoriteIds}
-                      toggleFavorite={toggleFavorite}
-                      show={show}
-                      handleMouseEnter={handleMouseEnter}
-                      handleMouseMove={handleMouseMove}
-                      handleMouseLeave={handleMouseLeave}
-                    />
-                  ))}
+          {searchQuery && visibleShows.length === 0 ? (
+            <div className="text-center text-white/80">
+              No shows found for “{searchQuery}”.
+            </div>
+          ) : (
+            <div className="space-y-8">
+              {Object.entries(sortedShows).map(([letter, shows]) => (
+                <div key={letter} className="space-y-4">
+                  <h2 className="text-3xl font-bold text-white/90 border-b border-white/20 pb-2">
+                    {letter}
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                    {shows.map((show) => (
+                      <MovieCard
+                        key={show.id}
+                        favoriteIds={favoriteIds}
+                        toggleFavorite={toggleFavorite}
+                        show={show}
+                        handleMouseEnter={handleMouseEnter}
+                        handleMouseMove={handleMouseMove}
+                        handleMouseLeave={handleMouseLeave}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* Hover Popup */}
           {hoveredShow && (
