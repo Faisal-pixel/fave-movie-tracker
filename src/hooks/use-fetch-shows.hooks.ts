@@ -12,6 +12,7 @@ export default function useFetchShows() {
   const [showsGenerator] = useState(() => getShows());
   const [hasMorePages, setHasMorePages] = useState(true); // I can use this to check if the pages still remain
   // might also need the nextpage function
+  console.log(shows)
   const loadNextPage = async () => {
     try {
       setLoading(true);
