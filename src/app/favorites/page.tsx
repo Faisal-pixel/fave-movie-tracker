@@ -19,7 +19,6 @@ const Page = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 100 });
 
   useEffect(() => {
-    console.log("Hi");
     const favoriteShowIds = localStorage.getItem("favoriteShows");
     const parsedFavoriteShowIds = JSON.parse(favoriteShowIds || "[]");
     setFavoriteIds(new Set(parsedFavoriteShowIds));
@@ -39,8 +38,6 @@ const Page = () => {
 
   const groupedFavorites = groupedShowsHelper(filteredFavorites);
   const sortedFavorites = sortedShowsHelpers(sortOrder, groupedFavorites);
-  console.log("Sorted favorites: ", sortedFavorites);
-  console.log("Favorites", favorites);
 
   const getSortIcon = () => {
     if (sortOrder === "asc")

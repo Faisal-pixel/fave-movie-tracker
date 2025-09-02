@@ -35,9 +35,9 @@ export const ShowProvider = ({ children }: { children: React.ReactNode }) => {
   const { shows: fetchedShows, showLoading, errMessage } = useFetchShows();
   useEffect(() => {
     (() => {
-      console.log("fetchedShows", fetchedShows);
+      
       const parsed = fetchedShows.length !== 0 ? showArrayParserHelpers(fetchedShows) : [];
-      console.log("Parsed shows", parsed);
+  
       setShows(parsed);
     })();
   }, [fetchedShows]);

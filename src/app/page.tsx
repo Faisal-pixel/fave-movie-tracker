@@ -1,10 +1,5 @@
 "use client";
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useContext,
-} from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { ChevronUp, ChevronDown, Play, Square, Heart } from "lucide-react";
 import { show } from "@/types/show.types";
 import MovieCard from "@/components/movie-card.component";
@@ -61,17 +56,19 @@ const TVShowTracker = () => {
   }, [shows, searchQuery]);
 
   const filteredFavorites = React.useMemo(() => {
-      if (!searchQuery || !searchQuery.trim()) return dummyShows;
-      return dummyShows.filter((show) =>
-        show.name?.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }, [searchQuery, dummyShows]);
+    if (!searchQuery || !searchQuery.trim()) return dummyShows;
+    return dummyShows.filter((show) =>
+      show.name?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery, dummyShows]);
 
   // Sort shows based on current sort order
 
   // Group shows alphabetically
 
-  const groupedShows = groupedShowsHelper(filteredFavorites ? filteredFavorites : visibleShows);
+  const groupedShows = groupedShowsHelper(
+    filteredFavorites ? filteredFavorites : visibleShows
+  );
 
   const sortedShows = sortedShowsHelpers(sortOrder, groupedShows);
 
@@ -131,7 +128,6 @@ const TVShowTracker = () => {
       return newFavorites;
     });
   };
-  console.log("I rendered");
 
   if (error) {
     return <div>Error loading shows</div>;

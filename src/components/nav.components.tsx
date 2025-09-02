@@ -8,9 +8,6 @@ import React, { useContext, useEffect, useState } from "react";
 const NavComponents = () => {
   const router = useRouter();
   const pathname = usePathname();
-  console.log("Pathname", pathname);
-  
-
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { setSearchQuery: contextSetSearchQuery } = useContext(ShowContext);
   useEffect(() => {
