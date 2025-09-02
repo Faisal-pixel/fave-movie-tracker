@@ -134,7 +134,7 @@ const TVShowTracker = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-6">
+    <div className="min-h-[500%] bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-6">
       {showLoading || shows.length === 0 ? (
         <LoadingState>Loading shows...</LoadingState>
       ) : (

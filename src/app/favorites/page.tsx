@@ -6,10 +6,23 @@ import groupedShowsHelper from "@/helpers/grouped-shows.helpers";
 import handleSortHelpers from "@/helpers/handle-sort.helpers";
 import sortedShowsHelpers from "@/helpers/sorted-shows.helpers";
 import { show } from "@/types/show.types";
-import { ChevronDown, ChevronUp, Heart, Play, Square } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Heart,
+  Play,
+  Square,
+  Trash2,
+} from "lucide-react";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
 const Page = () => {
+  // Clear favorites handler
+  const handleClearFavorites = () => {
+    setFavoriteIds(new Set());
+    setFavorites([]);
+    localStorage.setItem("favoriteShows", JSON.stringify([]));
+  };
   const { shows, searchQuery } = useContext(ShowContext);
   const [favorites, setFavorites] = useState<show[]>([]);
   const [sortOrder, setSortOrder] = useState<"none" | "asc" | "desc">("none"); // 'none', 'asc', 'desc'
@@ -108,7 +121,7 @@ const Page = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         {/* Controls */}
-        <div className="flex justify-between mb-8">
+        <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:justify-between mb-8">
           <button
             onClick={() => {
               handleSortHelpers(sortOrder, setSortOrder);
@@ -123,11 +136,21 @@ const Page = () => {
             </span>
           </button>
 
-          <div className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-white">
-            <Heart className="w-4 h-4 text-pink-400" />
-            <span className="text-sm font-medium">
-              {favoriteIds.size} Favorites
-            </span>
+          <div className="flex items-center gap-4">
+            <div className="flex flex-nowrap text-nowrap items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-white">
+              <Heart className="w-4 h-4 text-pink-400" />
+              <span className="text-sm font-medium">
+                {favoriteIds.size} Favorites
+              </span>
+            </div>
+
+            <button
+              onClick={handleClearFavorites}
+              className="flex flex-nowrap text-nowrap items-center cursor-pointer gap-2 px-3 py-2 bg-red-500/20 backdrop-blur-md border border-red-400/30 rounded-full text-red-200 hover:bg-red-500/30 hover:text-white transition-all duration-300 hover:scale-105"
+            >
+              <Trash2 className="w-4 h-4" />
+              <span className="text-sm font-medium">Clear Favorites</span>
+            </button>
           </div>
         </div>
 

@@ -23,7 +23,7 @@ const NavComponents = () => {
         <div className="flex flex-row justify-center sm:justify-start gap-2 w-full sm:w-auto">
           <button
             onClick={() => router.push("/")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full transition-all duration-300 ${
+            className={`flex cursor-pointer items-center gap-2 px-3 sm:px-4 py-2 rounded-full transition-all duration-300 ${
               pathname === "/"
                 ? "bg-white/20 text-white"
                 : "text-gray-300 hover:text-white hover:bg-white/10"
@@ -34,7 +34,7 @@ const NavComponents = () => {
           </button>
           <button
             onClick={() => router.push("/favorites")}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full transition-all duration-300 ${
+            className={`flex items-center cursor-pointer gap-2 px-3 sm:px-4 py-2 rounded-full transition-all duration-300 ${
               pathname === "/favorites"
                 ? "bg-white/20 text-white"
                 : "text-gray-300 hover:text-white hover:bg-white/10"
