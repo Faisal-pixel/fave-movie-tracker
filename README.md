@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fave Movie Tracker
 
-## Getting Started
+## 🚀 Live Demo
 
-First, run the development server:
+[Demo Link](#) <!-- Replace with your deployed app URL -->
+
+## 📝 Setup Instructions
 
 ```bash
+git clone https://github.com/your-username/fave-movie-tracker.git
+cd fave-movie-tracker
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗂️ Code Structure & Decisions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **State Management:**
+<!-- Briefly explain how you manage global and local state (e.g., React Context, useState, custom hooks). -->
+- **Component Design:**
+<!-- Describe your main components and how you separated concerns (e.g., MovieCard, Navbar, FavoritesPage). -->
+- **API Integration:**
+<!-- Note how/where you fetch data from TV Maze API and handle loading/error states. -->
+- **Styling:**
+<!-- Mention your approach (e.g., Tailwind CSS, custom CSS, component libraries). -->
+- **Grouping, Sorting, Searching:**
+<!-- Explain your logic for grouping, sorting, and searching shows. -->
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 💡 Assumptions & Tradeoffs
 
-## Learn More
+- <!-- List any assumptions you made (e.g., how you handle missing data, pagination, etc.). -->
+- <!-- Note any tradeoffs (e.g., performance vs. simplicity, UI choices). -->
 
-To learn more about Next.js, take a look at the following resources:
+## 🏗️ What Was Skipped & Why
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- <!-- List any requirements or bonus features you didn’t implement and your reasons (e.g., time constraints, technical decisions). -->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📚 Additional Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- <!-- Mention any optional enhancements, libraries, or design choices. -->
+- <!-- Add anything else you want reviewers to know. -->
